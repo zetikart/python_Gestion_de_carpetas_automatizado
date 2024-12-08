@@ -1,20 +1,18 @@
-import os
+import os  # Importa el módulo 'os' que permite interactuar con el sistema operativo.
 
-class DirectorySearcher:
-    def find(self, path, dir):
+class DirectorySearcher:  # Define una clase llamada 'DirectorySearcher'.
+    def find(self, path, dir):  # Define un método 'find' dentro de la clase, que toma 'path' y 'dir' como parámetros.
         try:
-            os.chdir(path)
+            os.chdir(path)  # Intenta cambiar el directorio de trabajo al especificado por 'path'.
         except OSError:
-            # No procesa un archivo que no es un directorio.
+            # Si 'path' no es un directorio válido, captura la excepción 'OSError' y sale del método.
             return
 
-        current_dir = os.getcwd()
-        for entry in os.listdir("."):
-            if entry == dir:
-                print(os.getcwd() + "/" + dir)
-            self.find(current_dir + "/" + entry, dir)
+        current_dir = os.getcwd()  # Guarda la ruta del directorio actual en 'current_dir'.
+        for entry in os.listdir("."):  # Itera sobre cada entrada en el directorio actual.
+            if entry == dir:  # Si la entrada es igual al nombre del directorio buscado 'dir', ejecuta el siguiente bloque.
+                print(os.getcwd() + "/" + dir)  # Imprime la ruta completa del directorio encontrado.
+            self.find(current_dir + "/" + entry, dir)  # Llama al método 'find' recursivamente para buscar en subdirectorios.
 
-
-directory_searchv3er = DirectorySearcher()
-directory_searchv3er.find("./tree", "python")
-    
+directory_searchv3er = DirectorySearcher()  # Crea una instancia de la clase 'DirectorySearcher'.
+directory_searchv3er.find("./tree", "python")  # Llama al método 'find' con la ruta inicial './tree' y busca un directorio llamado 'python'.
